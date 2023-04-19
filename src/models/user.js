@@ -23,7 +23,19 @@ const User = sequelize.define('User', {
     about : {
       type: Sequelize.TEXT
     },
+    address : {
+      type: Sequelize.TEXT
+    },
     image: {
+      type: Sequelize.STRING
+    },
+    birthday: {
+      type: Sequelize.DATE
+    },
+    website: {
+      type: Sequelize.STRING
+    },
+    degree: {
       type: Sequelize.STRING
     },
     password: {
@@ -31,7 +43,7 @@ const User = sequelize.define('User', {
     }
   });
 
-  // sequelize.sync()
+  sequelize.sync()
 
   module.exports = User
   

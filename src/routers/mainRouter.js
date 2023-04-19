@@ -44,6 +44,10 @@ router.post('/contact', async(req,res) => {
 
 })
 
+router.get('/detail', (req,res) => {
+    res.render('site/views/project')
+})
+
 router.post('/user/save', async(req,res) => {
 
     const user = req.body
