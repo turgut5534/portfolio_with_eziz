@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turgut Salgin - Portfolio</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/iziToast.min.css">
-</head>
-<body>
-    <h1>Hello! My name is Turgut Salgin</h1>
-    <form id="email-form" action="/send-email" method="POST">
-        <label for="">Your Name</label>
-        <input type="text" name="name" id="">
-        <label for="">Your Message</label>
-        <textarea name="message" id="" cols="30" rows="10"></textarea>
-        <button class="email-button" type="submit">Send</button>
-    </form>
+<%- include('../partials/head' , { title: 'Homepage' }) %>
+<%- include('../partials/header') %>
 
-    <script src="/js/iziToast.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="/js/ajax.js"></script>
-</body>
-</html>
+
+<%- include('../partials/footer') %>
