@@ -6,7 +6,11 @@ const email = require('../utils/email')
 
 router.get('/', (req,res) => {
 
-    res.render('index')
+    res.render('site/views/index')
+})
+
+router.get('/login', (req,res) => {
+    res.render('site/views/login')
 })
 
 router.post('/send-email', async(req,res) => {
