@@ -3,13 +3,21 @@ const router = new express.Router()
 const db = require('../db/mysql')
 const User = require('../models/user')
 const email = require('../utils/email')
+const bcrypt = require('bcrypt')
 
-router.get('/', (req,res) => {
+router.get('/', async(req,res) => {
 
-    res.render('site/views/index')
+    try {
+        const user = await User.findOne()
+        res.render('site/views/index', {user})
+    } catch(e) {
+        console.log(e)
+    }
+   
 })
 
 router.get('/login', (req,res) => {
+    
     res.render('site/views/login')
 })
 
@@ -29,6 +37,20 @@ router.post('/send-email', async(req,res) => {
     } catch(e) {
         console.log(e)
         res.status(400).send(e)
+    }
+
+})
+
+router.post('/user/save', async(req,res) => {
+
+    const user = req.body
+    
+    try {
+        user.password = await bcrypt.hash(user.password, 10);
+        await User.create(user)
+        res.status(201).send()
+    } catch(e) {
+        console.log(e)
     }
 
 })

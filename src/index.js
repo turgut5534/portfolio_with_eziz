@@ -14,6 +14,7 @@ app.set('view engine', 'ejs')
 app.set('views', viewsDirectory)
 app.use(express.static(publicDirectory))
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.json())
 
 app.use(mainRouter)
 app.use('/admin', adminRouter)
