@@ -1129,7 +1129,7 @@ body {
     padding: 12px 15px;
   }
   
-  .contact .php-email-form button[type=submit] {
+  .email-button[type=submit] {
     background: #18d26e;
     border: 0;
     padding: 10px 30px;
@@ -1138,6 +1138,16 @@ body {
     border-radius: 4px;
   }
   
+  .form-group > .form-input {
+    background-color: #040404 !important;
+    color: #fff;
+    border: 1px solid #555758 !important;
+  }
+
+
+  .form-group > .email-button {
+    padding: 3rem;
+  }
   .contact .php-email-form button[type=submit]:hover {
     background: #15bb62;
   }
