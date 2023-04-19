@@ -13,17 +13,7 @@ app.set('views', viewsDirectory)
 app.use(express.static(publicDirectory))
 
 app.get('/', (req,res) => {
-    User.create({
-  firstName: 'John',
-  lastName: 'Doe',
-  email: 'johndoe@example.com',
-  password: 'password123'
-}).then(user => {
-  console.log('User created:', user.toJSON());
-}).catch(error => {
-  console.error('Error creating user:', error);
-});
-
+    res.render('index')
 })
 
 app.listen(port , () => {
