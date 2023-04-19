@@ -20,7 +20,7 @@ router.post('/send-email', async(req,res) => {
       };
 
     try {
-        await email.sendMail(message)
+        // await email.sendMail(message)
         res.status(200).send()
     } catch(e) {
         console.log(e)
