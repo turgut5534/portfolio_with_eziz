@@ -24,6 +24,7 @@ $('#email-form').on('submit', function(e) {
                 message: 'Your message is sent successfully!',
             });
             button.html('Send')
+            $('#email-form')[0].reset();
         },
         error: function(e) {
             iziToast.error({

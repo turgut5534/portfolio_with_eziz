@@ -21,18 +21,21 @@ router.get('/login', (req,res) => {
     res.render('site/views/login')
 })
 
-router.post('/send-email', async(req,res) => {
+router.post('/contact', async(req,res) => {
 
     const message = {
         from: 'turgut@turgutsalgin.site',
         to: 'turgutsalgin5534@gmail.com',
         subject: 'A New Message From Portfolio',
         text: req.body.message,
-        html: req.body.message
+        html: `<p><b>From:</b> ${req.body.name}</p>
+        <p><b>Email</b>: ${req.body.email}</p>
+        <p><b>Subject</b>: ${req.body.subject}</p>
+        <p><b>Message</b>: ${req.body.message}</p>`
       };
 
     try {
-        // await email.sendMail(message)
+        await email.sendMail(message)
         res.status(200).send()
     } catch(e) {
         console.log(e)
