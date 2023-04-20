@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt')
 const Skill = require('../models/skills')
 const Education = require('../models/education')
 const Experience = require('../models/experience')
+const Project = require('../models/projects')
+const Category = require('../models/categories')
 
 router.get('/', async(req,res) => {
 
@@ -15,7 +17,8 @@ router.get('/', async(req,res) => {
             include: [
                 {model: Skill},
                 {model: Education},
-                {model: Experience}
+                {model: Experience},
+                {model: Project, include: [Category]}
             ] 
         });
         res.render('site/views/index', {user})
@@ -53,8 +56,15 @@ router.post('/contact', async(req,res) => {
 
 })
 
-router.get('/detail', (req,res) => {
-    res.render('site/views/project')
+router.get('/detail', async(req,res) => {
+    
+    try {
+        const user = await User.findOne()
+        res.render('site/views/project', {user})
+    } catch(e) {
+        console.log(e)
+    }
+    
 })
 
 router.post('/user/save', async(req,res) => {

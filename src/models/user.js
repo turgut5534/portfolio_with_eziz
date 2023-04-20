@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db/mysql')
 const Skill = require('./skills')
 const Experience = require('./experience')
-const Education = require('./education')
+const Education = require('./education');
+const Project = require('./projects');
 
 const User = sequelize.define('User', {
     name: {
@@ -49,9 +50,11 @@ const User = sequelize.define('User', {
   User.hasMany(Skill);
   User.hasMany(Education, { foreignKey: 'UserId' });
   User.hasMany(Experience);
+  User.hasMany(Project);
   Skill.belongsTo(User);
   Education.belongsTo(User)
   Experience.belongsTo(User)
+  Project.belongsTo(User)
 
   sequelize.sync()
 
