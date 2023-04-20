@@ -5,12 +5,18 @@ const User = require('../models/user')
 const email = require('../utils/email')
 const bcrypt = require('bcrypt')
 const Skill = require('../models/skills')
+const Education = require('../models/education')
+const Experience = require('../models/experience')
 
 router.get('/', async(req,res) => {
 
     try {
         const user = await User.findOne({
-            include: Skill 
+            include: [
+                {model: Skill},
+                {model: Education},
+                {model: Experience}
+            ] 
         });
         res.render('site/views/index', {user})
     } catch(e) {

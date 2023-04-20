@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db/mysql')
 const Skill = require('./skills')
+const Experience = require('./experience')
+const Education = require('./education')
 
 const User = sequelize.define('User', {
     name: {
@@ -45,9 +47,13 @@ const User = sequelize.define('User', {
   });
 
   User.hasMany(Skill);
+  User.hasMany(Education, { foreignKey: 'UserId' });
+  User.hasMany(Experience);
   Skill.belongsTo(User);
+  Education.belongsTo(User)
+  Experience.belongsTo(User)
 
-  // sequelize.sync()
+  sequelize.sync()
 
   module.exports = User
   
