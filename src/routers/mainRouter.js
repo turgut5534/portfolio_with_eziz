@@ -56,11 +56,14 @@ router.post('/contact', async(req,res) => {
 
 })
 
-router.get('/detail', async(req,res) => {
+router.get('/detail/:id', async(req,res) => {
     
     try {
         const user = await User.findOne()
-        res.render('site/views/project', {user})
+        const project = await Project.findByPk(req.params.id, {
+            include: [Category]
+        })
+        res.render('site/views/project', {user, project})
     } catch(e) {
         console.log(e)
     }

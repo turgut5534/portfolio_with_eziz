@@ -56,7 +56,7 @@ const User = sequelize.define('User', {
   Experience.belongsTo(User)
   Project.belongsTo(User)
 
-  sequelize.sync()
+  // sequelize.sync()
 
   module.exports = User
   
