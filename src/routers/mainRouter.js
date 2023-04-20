@@ -4,11 +4,14 @@ const db = require('../db/mysql')
 const User = require('../models/user')
 const email = require('../utils/email')
 const bcrypt = require('bcrypt')
+const Skill = require('../models/skills')
 
 router.get('/', async(req,res) => {
 
     try {
-        const user = await User.findOne()
+        const user = await User.findOne({
+            include: Skill 
+        });
         res.render('site/views/index', {user})
     } catch(e) {
         console.log(e)

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db/mysql')
+const Skill = require('./skills')
 
 const User = sequelize.define('User', {
     name: {
@@ -43,7 +44,10 @@ const User = sequelize.define('User', {
     }
   });
 
-  sequelize.sync()
+  User.hasMany(Skill);
+  Skill.belongsTo(User);
+
+  // sequelize.sync()
 
   module.exports = User
   
