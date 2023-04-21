@@ -113,11 +113,13 @@ router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name
     }
   });
 
-router.post('/update', auth,  async(req,res) => {
-
-    const id = req.body.id
+router.post('/update', auth,  upload.fields([{ name: 'image', maxCount: 1 }, { name: 'files[]', maxCount: 10 }]),  async(req,res) => {
 
     try {
+
+        let files = [];
+
+        const { id } = req.body
 
         const project = await Project.findByPk(id)
 
@@ -130,8 +132,33 @@ router.post('/update', auth,  async(req,res) => {
             lower: true,
             strict: true
           });
-        await project.save()
+   
+        if (req.files['image']) {
 
+            const path = uploadDirectory + '/' + project.image
+            await fs.promises.unlink(path)
+            
+            image = req.files['image'][0].filename;
+            project.image = image
+        }
+
+        await project.save()
+        
+      if (req.files['files[]']) {
+
+        files = req.files['files[]']
+
+        for (const file of files) {
+
+            const projectFile = new ProjectFiles({
+              file: file.filename,
+              extension: path.extname(file.originalname),
+              projectId: project.id
+            });
+            await projectFile.save();
+          }
+      }
+        
         res.redirect('/admin/project/all')
 
     } catch(e) {

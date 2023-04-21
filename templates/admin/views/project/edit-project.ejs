@@ -12,7 +12,7 @@
                             </div>
                         </div>
                     </div>
-                    <form action="/admin/project/update" method="POST">
+                    <form action="/admin/project/update" method="POST" enctype="multipart/form-data">
 
                         <input type="hidden" name="id" value="<%= project.id %>">
 
@@ -48,7 +48,12 @@
                             <textarea rows="20" id="description" name="description" class="form-control"><%= project.description %></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Add project</button>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Images:</label>
+                            <input class="form-control" type="file" multiple name="files[]">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Update project</button>
 
                     </form>
 
