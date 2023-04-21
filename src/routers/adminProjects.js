@@ -7,6 +7,7 @@ const multer = require('multer');
 const path = require('path')
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
+const ProjectFiles = require('../models/projectFiles')
 
 const uploadDirectory = path.join(__dirname, '../../uploads')
 
@@ -51,24 +52,44 @@ router.get('/edit/:id', auth, async(req,res) => {
 
 })
 
-router.post('/save', auth, upload.single('image'), async(req,res) => {
-
+router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'files[]', maxCount: 10 }]), async (req, res) => {
     try {
-        const { title, client, url, date, description } = req.body;
-        const image = req.file.filename
-        const project = new Project({ title, client, url, date, description, image });
-        project.slug = slugify(req.body.title, {
-          lower: true,
-          strict: true,
-        });
-        project.UserId = req.user.id;
-        await project.save();
-        res.redirect('/admin/project/all');
-    } catch(e) {0
-        console.log(e)
-    }
+      const { title, client, url, date, description } = req.body;
+      let image = null;
+      let files = [];
+  
+      if (req.files['image']) {
+        image = req.files['image'][0].filename;
+      }
+  
+      const project = new Project({ title, client, url, date, description, image });
+      project.slug = slugify(req.body.title, {
+        lower: true,
+        strict: true,
+      });
+      project.UserId = req.user.id;
+      await project.save();
 
-})
+      if (req.files['files[]']) {
+
+        files = req.files['files[]']
+
+        for (const file of files) {
+
+            const projectFile = new ProjectFiles({
+              file: file.filename,
+              extension: path.extname(file.originalname),
+              projectId: project.id
+            });
+            await projectFile.save();
+          }
+      }
+      
+      res.redirect('/admin/project/all');
+    } catch(e) {
+      console.log(e);
+    }
+  });
 
 router.post('/update', auth,  async(req,res) => {
 
@@ -112,6 +133,16 @@ router.delete('/delete/:id', async(req,res) => {
             const path = uploadDirectory + '/' + project.image
             await fs.promises.unlink(path)
             
+        }
+
+        const files = await ProjectFiles.findAll({where: {projectId: project.id}})
+        console.log(files)
+
+        if(files) {
+            for(const f of files) {
+                const path = uploadDirectory + '/' + f.file
+                await fs.promises.unlink(path)
+            }
         }
 
         await project.destroy()
