@@ -7,7 +7,9 @@ const multer = require('multer');
 const path = require('path')
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
-const ProjectFiles = require('../models/projectFiles')
+const ProjectFiles = require('../models/projectFiles');
+const ProjectCategories = require('../models/projectCategories');
+const Category = require('../models/categories');
 
 const uploadDirectory = path.join(__dirname, '../../uploads')
 
@@ -45,9 +47,14 @@ router.get('/edit/:id', auth, async(req,res) => {
 
     try {
         const project = await Project.findByPk(req.params.id, {
-            include: ProjectFiles
+            include: [
+              {model: ProjectFiles}, 
+              {model: ProjectCategories}
+            ]
         })
-        res.render('admin/views/project/edit-Project', {project})
+
+        const categories = await Category.findAll()
+        res.render('admin/views/project/edit-Project', {project, categories})
     } catch(e) {
         console.log(e)
     }
@@ -119,7 +126,7 @@ router.post('/update', auth,  upload.fields([{ name: 'image', maxCount: 1 }, { n
 
         let files = [];
 
-        const { id } = req.body
+        const { id, categories } = req.body
 
         const project = await Project.findByPk(id)
 
@@ -158,6 +165,52 @@ router.post('/update', auth,  upload.fields([{ name: 'image', maxCount: 1 }, { n
             await projectFile.save();
           }
       }
+
+      // ------------------------------
+
+      const projectCategories = await ProjectCategories.findAll({
+        where: { projectId: project.id },
+        include: [Category]
+      });
+  
+      const categoryIDs = projectCategories.map(category => category.category.id);
+
+
+      // get unchecked tags
+      const checkedCategories = categories 
+      let checkedCategoryIds = [] 
+  
+
+      if(checkedCategories != undefined && Array.isArray(checkedCategories) ) {
+        checkedCategoryIds.push(checkedCategories.map(id => parseInt(id)));
+      }
+  
+
+      for(i=0; i<categoryIDs.length; i++) {
+  
+        if(!checkedCategoryIds.includes(categoryIDs[i])) {
+          await ProjectCategories.destroy({ where: { projectId: project.id, categoryId: categoryIDs[i] } })
+        }
+  
+      }
+
+  
+      if(categories) {
+        for(const category of categories) {
+  
+            const checkProjectCatgory = await ProjectCategories.findOne({ where: { projectId: project.id, categoryId: category } });
+  
+            if(!checkProjectCatgory) {
+                await ProjectCategories.create({
+                  projectId : project.id,
+                  categoryId: category
+                })
+            }
+
+        }
+      }
+
+      //-------------------------------
         
         res.redirect('/admin/project/all')
 

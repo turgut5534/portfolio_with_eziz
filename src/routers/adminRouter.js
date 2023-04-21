@@ -7,6 +7,7 @@ const adminSkillsRouter = require('./adminSkills')
 const adminEducationRouter = require('./adminEducations')
 const adminExperienceRouter = require('./adminExperiences')
 const adminProjectRouter = require('./adminProjects')
+const Activities = require('../models/activities')
 
 router.get('/', auth, (req,res) => {
     res.send('This is admin page')
@@ -16,7 +17,8 @@ router.get('/profile', auth, async(req,res) => {
 
     const user = await User.findOne({
         include: [
-            {model: Skill}
+            {model: Skill},
+            {model: Activities}
         ]
     })
 
