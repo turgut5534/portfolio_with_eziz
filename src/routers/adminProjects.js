@@ -64,7 +64,7 @@ router.post('/save', auth, upload.single('image'), async(req,res) => {
         project.UserId = req.user.id;
         await project.save();
         res.redirect('/admin/project/all');
-    } catch(e) {
+    } catch(e) {0
         console.log(e)
     }
 
