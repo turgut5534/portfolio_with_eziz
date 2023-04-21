@@ -3,6 +3,25 @@ const router = new express.Router()
 const auth = require('../middlewares/auth')
 const Project = require('../models/projects')
 const slugify = require('slugify');
+const multer = require('multer');
+const path = require('path')
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs')
+
+const uploadDirectory = path.join(__dirname, '../../uploads')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+      const uniqueId = uuidv4();
+      const ext = path.extname(file.originalname);
+      cb(null, uniqueId + ext);
+    }
+});
+  
+const upload = multer({ storage: storage });
 
 router.get('/all', auth, async(req,res) => {
 
@@ -17,7 +36,7 @@ router.get('/all', auth, async(req,res) => {
 
 router.get('/add', auth, (req,res) => {
 
-    res.render('admin/views/project/add-Project')
+    res.render('admin/views/project/add-project')
 
 })
 
@@ -32,17 +51,19 @@ router.get('/edit/:id', auth, async(req,res) => {
 
 })
 
-router.post('/save', auth,  async(req,res) => {
+router.post('/save', auth, upload.single('image'), async(req,res) => {
 
     try {
-        const project = new Project(req.body)
+        const { title, client, url, date, description } = req.body;
+        const image = req.file.filename
+        const project = new Project({ title, client, url, date, description, image });
         project.slug = slugify(req.body.title, {
-            lower: true,
-            strict: true
-          });
-        project.UserId = req.user.id
-        await project.save()
-        res.redirect('/admin/project/all')
+          lower: true,
+          strict: true,
+        });
+        project.UserId = req.user.id;
+        await project.save();
+        res.redirect('/admin/project/all');
     } catch(e) {
         console.log(e)
     }
@@ -84,6 +105,13 @@ router.delete('/delete/:id', async(req,res) => {
 
         if(!project) {
             return res.status(401).send()
+        }
+
+        if(project.image) {
+
+            const path = uploadDirectory + '/' + project.image
+            await fs.promises.unlink(path)
+            
         }
 
         await project.destroy()
