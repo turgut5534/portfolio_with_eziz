@@ -1,5 +1,4 @@
 <%- include('../partials/head' , { title: 'Homepage' }) %>
-<%- include('../partials/header') %>
 
 <main id="main">
 
@@ -15,17 +14,11 @@
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
 
+                <% project.project_files.forEach((file) => { %>
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="">
+                  <img src="/<%= file.file %>" alt="">
                 </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="">
-                </div>
+                <% }) %>
 
               </div>
               <div class="swiper-pagination"></div>

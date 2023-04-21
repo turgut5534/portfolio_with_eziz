@@ -9,6 +9,7 @@ const Education = require('../models/education')
 const Experience = require('../models/experience')
 const Project = require('../models/projects')
 const Category = require('../models/categories')
+const ProjectFiles = require('../models/projectFiles')
 
 router.get('/', async(req,res) => {
 
@@ -61,7 +62,10 @@ router.get('/detail/:id', async(req,res) => {
     try {
         const user = await User.findOne()
         const project = await Project.findByPk(req.params.id, {
-            include: [Category]
+            include: [
+                {model: Category},
+                {model: ProjectFiles}
+            ]
         })
         res.render('site/views/project', {user, project})
     } catch(e) {
