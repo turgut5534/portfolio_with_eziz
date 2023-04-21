@@ -10,7 +10,8 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.2.3",
     "nodemailer": "^6.9.1",
-    "sequelize": "^6.31.0"
+    "sequelize": "^6.31.0",
+    "slugify": "^1.6.6"
   },
   "name": "portfolio_with_eziz",
   "version": "1.0.0",

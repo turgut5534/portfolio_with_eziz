@@ -1,0 +1,57 @@
+<%- include('../../partials/head' , { title: 'Edit Project' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Edit Project
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/admin/project/update" method="POST">
+
+                        <input type="hidden" name="id" value="<%= project.id %>">
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image:</label>
+                            <input type="file" id="image" name="image" class="form-control" >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title:</label>
+                            <input type="text" id="title" name="title" class="form-control" required value="<%= project.id %>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="client" class="form-label">Client:</label>
+                            <input type="text" id="client" name="client" class="form-control" required value="<%= project.client %>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="url" class="form-label">URL:</label>
+                            <input type="text" id="url" name="url" class="form-control" required value="<%= project.url %>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date:</label>
+                            <% const projectDate = new Date(project.date); %>
+                            <% const dateString = projectDate.toISOString().substr(0, 10); %>
+                            <input type="date" id="date" name="date" class="form-control" required value="<%= dateString %>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea rows="20" id="description" name="description" class="form-control"><%= project.description %></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add project</button>
+                    </form>
+
+                </div>
+            </main>
+
+            <%- include('../../partials/footer') %>

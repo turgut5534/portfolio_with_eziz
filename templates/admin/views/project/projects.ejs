@@ -1,0 +1,49 @@
+<%- include('../../partials/head' , { title: 'Projects' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Projects
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <a class="btn btn-success" href="/admin/project/add">
+                                +Add
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row projects">
+                      <% projects.forEach((project) => { %>
+                          <div class="col-md-6 mb-4 project-<%= project.id %>">
+                              <div class="card">
+                                  <img src="/<%= project.image %>" class="card-img-top" alt="<%= project.title %>">
+                                  <div class="card-body">
+                                      <h5 class="card-title"><%= project.title %></h5>
+                                      <h6 class="card-subtitle mb-2 text-muted"><%= project.client %></h6>
+                                      <p class="card-text"><%= project.description %></p>
+                                      <a href="<%= project.url.startsWith('http') ? project.url : 'http://' + project.url %>" class="card-link" target="_blank">Visit website</a>
+
+                                  </div>
+                                  <div class="card-footer">
+                                      <small class="text-muted"><%= new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></small>
+                                      <div class="float-end">
+                                          <a href="/admin/project/edit/<%= project.id %>" class="btn btn-sm btn-outline-secondary me-2">Edit</a>
+                                          <button type="button" class="btn btn-sm btn-outline-danger delete-data" data-data="project" data-title="<%= project.title %>" data-id="<%= project.id %>" data-href="/admin/project/delete/<%= project.id %>">Delete</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      <% }) %>
+                  </div>
+                  
+                      
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>

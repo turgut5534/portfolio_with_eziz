@@ -6,6 +6,7 @@ const User = require('../models/user')
 const adminSkillsRouter = require('./adminSkills')
 const adminEducationRouter = require('./adminEducations')
 const adminExperienceRouter = require('./adminExperiences')
+const adminProjectRouter = require('./adminProjects')
 
 router.get('/', auth, (req,res) => {
     res.send('This is admin page')
@@ -26,5 +27,6 @@ router.get('/profile', auth, async(req,res) => {
 router.use('/skills', adminSkillsRouter)
 router.use('/education', adminEducationRouter)
 router.use('/experience', adminExperienceRouter)
+router.use('/project', adminProjectRouter)
 
 module.exports = router
