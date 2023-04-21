@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000
 const mainRouter = require('./routers/mainRouter')
 const adminRouter = require('./routers/adminRouter')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 const viewsDirectory = path.join(__dirname, '../templates')
 const publicDirectory = path.join(__dirname, '../public')
@@ -16,6 +17,7 @@ app.set('views', viewsDirectory)
 app.use(express.static(publicDirectory))
 app.use(express.static(uploadsDirectory))
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(cookieParser())
 app.use(express.json())
 
 app.use(mainRouter)

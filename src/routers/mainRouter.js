@@ -1,6 +1,5 @@
 const express = require('express')
 const router = new express.Router()
-const db = require('../db/mysql')
 const User = require('../models/user')
 const email = require('../utils/email')
 const bcrypt = require('bcrypt')
@@ -10,6 +9,9 @@ const Experience = require('../models/experience')
 const Project = require('../models/projects')
 const Category = require('../models/categories')
 const ProjectFiles = require('../models/projectFiles')
+const jwt = require('jsonwebtoken')
+require('dotenv').config();
+const auth = require('../middlewares/auth')
 
 router.get('/', async(req,res) => {
 
@@ -33,6 +35,55 @@ router.get('/login', (req,res) => {
     
     res.render('site/views/login')
 })
+
+router.post('/login', async(req,res) => {
+
+    try {
+        const user = await User.findOne({where: {email: req.body.email}})
+        
+        if(!user) {
+            return res.status(401).json({error: "Incorrect email or password!"})
+        }
+
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password) 
+
+        if(!passwordMatch) {
+            return res.status(401).json({error: "Incorrect email or password!"})
+        }
+
+        const token = jwt.sign({userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' })
+        
+        res.cookie('token', token, { httpOnly: true });
+
+        res.status(200).json({ message: 'Logged in successfully', user: user })
+
+    } catch(e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/logout', (req, res) => {
+
+    // Clear the token cookie
+    res.cookie('token', '', { expires: new Date(0) })
+  
+    // Redirect to the login page or any other page
+    res.redirect('/login')
+  })
+  
+
+router.get('/profile', auth, (req, res) => {
+    try {
+      // Access the user object from the request object
+      const user = req.user
+  
+      res.send(user)
+    } catch (e) {
+      res.status(500).send()
+    }
+  })
+  
 
 router.post('/contact', async(req,res) => {
 
