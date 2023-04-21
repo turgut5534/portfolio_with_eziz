@@ -31,7 +31,7 @@
                                 <% } %>
                                 <div class="d-flex justify-content-end">
                                   <a href="/admin/education/edit/<%= education.id %>" class="btn btn-sm btn-outline-secondary me-2 edit-education">Edit</a>
-                                  <a href="javascript:;" data-href="/admin/education/delete/<%= education.id %>" class="btn btn-sm btn-outline-danger delete-education" data-id="<%= education.id %>">Delete</a>
+                                  <a href="javascript:;" data-data="education" data-title="<%= education.school %>" data-href="/admin/education/delete/<%= education.id %>" class="btn btn-sm btn-outline-danger delete-data" data-id="<%= education.id %>">Delete</a>
                                 </div>
                               </div>
                             </div>

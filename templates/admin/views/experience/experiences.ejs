@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="row educations">
+                    <div class="row experiencess">
                         <% experiences.forEach((experience) => { %>
                           <div class="col-12 col-md-6 col-lg-4 experience-<%= experience.id %>">
                             <div class="card mb-4">
@@ -31,7 +31,7 @@
                                 <% } %>
                                 <div class="d-flex justify-content-end">
                                   <a href="/admin/experience/edit/<%= experience.id %>" class="btn btn-sm btn-outline-secondary me-2 edit-experience">Edit</a>
-                                  <a href="javascript:;" data-href="/admin/experience/delete/<%= experience.id %>" class="btn btn-sm btn-outline-danger delete-experience" data-id="<%= experience.id %>">Delete</a>
+                                  <a href="javascript:;" data-data="experience" data-title="<%= experience.title %>" data-href="/admin/experience/delete/<%= experience.id %>" class="btn btn-sm btn-outline-danger delete-data" data-id="<%= experience.id %>">Delete</a>
                                 </div>
                               </div>
                             </div>
