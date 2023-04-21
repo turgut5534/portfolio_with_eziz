@@ -15,6 +15,8 @@ const authMiddleware = async (req, res, next) => {
     const user = await User.findByPk(userId)
     req.user = user
 
+    res.locals.user = user
+
     next()
   } catch (err) {
     res.redirect('/login')
