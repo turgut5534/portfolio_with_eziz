@@ -75,11 +75,11 @@
                           <div class="row row-cols-1 row-cols-md-4 g-4">
                             <% project.project_files.forEach((projectFile) => { %>
                               <div class="col project-file-<%= projectFile.id %>">
-                                <div class="card h-100">
+                                <div class="card img-container">
                                   <img src="/<%= projectFile.file %>" alt="" class="card-img-top">
                                   <div class="card-body">
-                                    <h5 class="card-title"><%= projectFile.name %></h5>
-                                    <p class="card-text"><%= projectFile.description %></p>
+                                    <!-- <h5 class="card-title"><%= projectFile.name %></h5>
+                                    <p class="card-text"><%= projectFile.description %></p> -->
                                     <button data-id="<%= projectFile.id %>" class="btn btn-danger delete-file" data-file="<%= projectFile._id %>">X</button>
                                   </div>
                                 </div>
