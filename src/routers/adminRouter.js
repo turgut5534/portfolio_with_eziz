@@ -4,6 +4,7 @@ const auth = require('../middlewares/auth')
 const Skill = require('../models/skills')
 const User = require('../models/user')
 const adminSkillsRouter = require('./adminSkills')
+const adminEducationRouter = require('./adminEducations')
 
 router.get('/', auth, (req,res) => {
     res.send('This is admin page')
@@ -22,5 +23,6 @@ router.get('/profile', auth, async(req,res) => {
 })
 
 router.use('/skills', adminSkillsRouter)
+router.use('/education', adminEducationRouter)
 
 module.exports = router

@@ -1,0 +1,45 @@
+<%- include('../../partials/head' , { title: 'Skills' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Educations
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <a class="btn btn-success" href="/admin/education/add">
+                                +Add
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row educations">
+                        <% educations.forEach((education) => { %>
+                          <div class="col-12 col-md-6 col-lg-4 education-<%= education.id %>">
+                            <div class="card mb-4">
+                              <div class="card-body">
+                                <h5 class="card-title"><%= education.school %></h5>
+                                <h6 class="card-subtitle mb-2 text-muted"><%= education.degree %> in <%= education.fieldOfStudy %></h6>
+                                <p class="card-text"><%= education.startDate.toLocaleString('default', { month: 'long', year: 'numeric' }) %> - <%= education.endDate.toLocaleString('default', { month: 'long', year: 'numeric' }) %></p>
+                                <% if (education.description) { %>
+                                  <p class="card-text"><%= education.description %></p>
+                                <% } %>
+                                <div class="d-flex justify-content-end">
+                                  <a href="/admin/education/edit/<%= education.id %>" class="btn btn-sm btn-outline-secondary me-2 edit-education">Edit</a>
+                                  <a href="javascript:;" data-href="/admin/education/delete/<%= education.id %>" class="btn btn-sm btn-outline-danger delete-education" data-id="<%= education.id %>">Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <% }) %>
+                      </div>
+                      
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>

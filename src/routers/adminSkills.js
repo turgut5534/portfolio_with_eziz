@@ -6,10 +6,11 @@ const User = require('../models/user')
 
 
 router.get('/all', auth, async (req, res) => {
+
   try {
     const skills = await Skill.findAll()
 
-    res.render('admin/views/skills', { skills })
+    res.render('admin/views/skills/skills', { skills })
   } catch (e) {
     res.status(500).send()
   }
@@ -19,6 +20,7 @@ router.get('/all', auth, async (req, res) => {
 router.post('/save', auth, async (req, res) => {
 
   const skill = new Skill(req.body)
+  skill.UserId = req.user.id
 
   try {
     const newSkill = await skill.save()
