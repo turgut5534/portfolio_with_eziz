@@ -143,3 +143,43 @@ $('body').on('click', '.delete-data', function(e) {
       })
     
 })
+
+$('.delete-file').on('click', function() {
+    
+    const id = $(this).data('id')
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "File will be deleted",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            
+            $.ajax({
+                type: 'DELETE',
+                url: "/admin/project/projectfile/delete/"+ id,
+                success: function(response) {
+
+                    $('.project-file-'+ id).remove()
+
+                    iziToast.success({
+                        title: 'Ok',
+                        message: 'The file has been deleted successfully!',
+                    });
+                },
+                error: function(e) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'An error occured deleting the file',
+                    });
+                }
+            })
+
+        }
+      })
+
+})

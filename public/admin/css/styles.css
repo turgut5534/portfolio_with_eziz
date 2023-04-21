@@ -1,0 +1,9 @@
+.delete-file {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  img {
+    object-fit: cover;
+  }

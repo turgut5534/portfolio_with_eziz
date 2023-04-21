@@ -44,10 +44,32 @@ router.get('/add', auth, (req,res) => {
 router.get('/edit/:id', auth, async(req,res) => {
 
     try {
-        const project = await Project.findByPk(req.params.id)
+        const project = await Project.findByPk(req.params.id, {
+            include: ProjectFiles
+        })
         res.render('admin/views/project/edit-Project', {project})
     } catch(e) {
         console.log(e)
+    }
+
+})
+
+router.delete('/projectfile/delete/:id', async(req,res) => {
+
+    try {
+
+        const file = await ProjectFiles.findByPk(req.params.id)
+
+        const path = uploadDirectory + '/' + file.file
+        await fs.promises.unlink(path)
+
+        await file.destroy()
+
+        res.status(200).send()
+
+    } catch(e) {
+        console.log(e)
+        res.status(400).send(e)
     }
 
 })
@@ -84,7 +106,7 @@ router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name
             await projectFile.save();
           }
       }
-      
+
       res.redirect('/admin/project/all');
     } catch(e) {
       console.log(e);
