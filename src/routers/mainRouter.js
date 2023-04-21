@@ -33,13 +33,12 @@ router.get('/', async(req,res) => {
 
 router.get('/login', (req,res) => {
     
-    const token = req.cookies.token
+    // const token = req.cookies.token
 
-    if(token) {
-        return res.redirect('/admin/profile')
-    }
+    // if(token) {
+    //     return res.redirect('/admin/profile')
+    // }
     
-    console.log(req.user)
 
     res.render('site/views/login')
 })

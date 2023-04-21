@@ -1,58 +1,99 @@
 <nav id="sidebar" class="sidebar js-sidebar">
-    <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
-  <span class="align-middle">AdminKit</span>
-</a>
-
-        <ul class="sidebar-nav">
-            <li class="sidebar-header">
-                Pages
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="index.html">
-      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+  <div class="sidebar-content js-simplebar">
+    <a class="sidebar-brand" href="/admin/profile">
+      <span class="align-middle">AdminKit</span>
     </a>
-            </li>
 
-            <li class="sidebar-item active">
-                <a class="sidebar-link" href="pages-profile.html">
-      <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-    </a>
-            </li>
+    <ul class="sidebar-nav">
+      <li class="sidebar-header">
+        Pages
+      </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="/admin/skills">
-      <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Skills</span>
-    </a>
-            </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="index.html">
+          <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+        </a>
+      </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-sign-up.html">
-      <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Educations</span>
-    </a>
-            </li>
+      <li class="sidebar-item active">
+        <a class="sidebar-link" href="/admin/profile">
+          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+        </a>
+      </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-blank.html">
-      <i class="align-middle" data-feather="book"></i> <span class="align-middle">Experiences</span>
-    </a>
-            </li>
+      <li class="sidebar-item active">
+        <a class="sidebar-link" href="/admin/skills/all">
+          <i class="align-middle" data-feather="user"></i> <span class="align-middle">Skills</span>
+        </a>
+      </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="ui-buttons.html">
-      <i class="align-middle" data-feather="square"></i> <span class="align-middle">Projects</span>
-    </a>
-            </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#collapseEducations" role="button" aria-expanded="false"
+          aria-controls="collapseExample">
+          <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Educations</span>
+        </a>
+        <div class="collapse ms-3" id="collapseEducations">
+          <a class="sidebar-link" href="/admin/educations/all">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">All Education</span>
+          </a>
+          <a class="sidebar-link" href="/admin/educations/add">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add Education</span>
+          </a>
+        </div>
+      </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="ui-forms.html">
-      <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Blogs</span>
-    </a>
-            </li>
-        </ul>
+      <li class="sidebar-item">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#collapseExperiences" role="button" aria-expanded="false"
+          aria-controls="collapseExample">
+          <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Experiences</span>
+        </a>
+        <div class="collapse ms-3" id="collapseExperiences">
+          <a class="sidebar-link" href="/admin/skills/add">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">All Experiences</span>
+          </a>
+          <a class="sidebar-link" href="ui-forms.html">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add Experience</span>
+          </a>
+        </div>
+      </li>
 
-    </div>
+      <li class="sidebar-item">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#collapseProjects" role="button" aria-expanded="false"
+          aria-controls="collapseExample">
+          <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Projects</span>
+        </a>
+        <div class="collapse ms-3" id="collapseProjects">
+          <a class="sidebar-link" href="/admin/skills/add">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">All Projects</span>
+          </a>
+          <a class="sidebar-link" href="ui-forms.html">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add Project</span>
+          </a>
+        </div>
+      </li>
+
+      <li class="sidebar-item">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#collapseBlogs" role="button" aria-expanded="false"
+          aria-controls="collapseExample">
+          <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Blogs</span>
+        </a>
+        <div class="collapse ms-3" id="collapseBlogs">
+          <a class="sidebar-link" href="/admin/skills/add">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">All Blogs</span>
+          </a>
+          <a class="sidebar-link" href="ui-forms.html">
+            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add Blog</span>
+          </a>
+        </div>
+      </li>
+
+
+
+
+
+    </ul>
+
+  </div>
 </nav>
 
 <div class="main">
