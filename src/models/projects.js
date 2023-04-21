@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db/mysql');
 const ProjectFiles = require('./projectFiles');
-const Category = require('./categories');
+const ProjectCategories = require('./projectCategories');
 
 const Project = sequelize.define('project', {
     image: {
@@ -33,8 +33,9 @@ const Project = sequelize.define('project', {
   });
 
   Project.hasMany(ProjectFiles)
-  Project.hasMany(Category)
+  Project.hasMany(ProjectCategories)
   ProjectFiles.belongsTo(Project)
-  Category.belongsTo(Project)
+  ProjectCategories.belongsTo(Project)
+
 
   module.exports = Project

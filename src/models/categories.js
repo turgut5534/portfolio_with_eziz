@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../db/mysql')
+const sequelize = require('../db/mysql');
+const ProjectCategories = require('./projectCategories');
 
 const Category = sequelize.define('category', {
     name: {
@@ -11,5 +12,8 @@ const Category = sequelize.define('category', {
         allowNull: false
       }
   });
+
+  Category.hasMany(ProjectCategories)
+  ProjectCategories.belongsTo(Category)
 
   module.exports = Category
