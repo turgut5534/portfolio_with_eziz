@@ -33,6 +33,14 @@ router.get('/', async(req,res) => {
 
 router.get('/login', (req,res) => {
     
+    const token = req.cookies.token
+
+    if(token) {
+        return res.redirect('/admin/profile')
+    }
+    
+    console.log(req.user)
+
     res.render('site/views/login')
 })
 
@@ -70,18 +78,6 @@ router.get('/logout', (req, res) => {
   
     // Redirect to the login page or any other page
     res.redirect('/login')
-  })
-  
-
-router.get('/profile', auth, (req, res) => {
-    try {
-      // Access the user object from the request object
-      const user = req.user
-  
-      res.send(user)
-    } catch (e) {
-      res.status(500).send()
-    }
   })
   
 

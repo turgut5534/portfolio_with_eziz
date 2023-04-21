@@ -1,9 +1,15 @@
 const express = require('express')
 const router = new express.Router()
-const isAuthorized = require('../middlewares/auth')
+const auth = require('../middlewares/auth')
 
-router.get('/', isAuthorized, (req,res) => {
+router.get('/', auth, (req,res) => {
     res.send('This is admin page')
+})
+
+router.get('/profile', auth, (req,res) => {
+
+    res.render('admin/views/profile')
+
 })
 
 module.exports = router
