@@ -12,18 +12,28 @@ const ProjectFiles = require('../models/projectFiles')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const auth = require('../middlewares/auth')
+const ProjectCategories = require('../models/projectCategories')
 
 router.get('/', async(req,res) => {
 
     try {
         const user = await User.findOne({
             include: [
-                {model: Skill},
-                {model: Education},
-                {model: Experience},
-                {model: Project, include: [Category]}
-            ] 
-        });
+              { model: Skill },
+              { model: Education },
+              { model: Experience },
+              {
+                model: Project,
+                include: [
+                  {
+                    model: ProjectCategories,
+                    include: [Category],
+                  },
+                ],
+              },
+            ],
+          });
+          
         res.render('site/views/index', {user})
     } catch(e) {
         console.log(e)

@@ -354,14 +354,13 @@
       <div class="row portfolio-container">
 
         <% user.projects.forEach((p)=> { %>
-        <div class="col-lg-4 col-md-6 portfolio-item <% p.categories.forEach((c) => { %>filter-<%= c.name %> <% }) %>">
+        <div class="col-lg-4 col-md-6 portfolio-item <% p.project_categories.forEach((c) => { %>filter-<%= c.category.name %> <% }) %>">
           <div class="portfolio-wrap">
             <img src="/<%= p.image %>" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <% p.categories.forEach((c) => { %>
-                <h4><%= c.name %></h4>
+              <% p.project_categories.forEach((c) => { %>
+                <h4 style="text-transform: capitalize;"><%= c.category.name %></h4>
               <% }) %>
-              <p>App</p>
               <div class="portfolio-links">
                 <a href="/<%= p.image %>" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
                 <a href="/detail/<%= p.id %>" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
