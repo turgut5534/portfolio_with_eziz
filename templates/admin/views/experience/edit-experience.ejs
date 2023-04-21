@@ -1,4 +1,4 @@
-<%- include('../../partials/head' , { title: 'Edit Education' }) %>
+<%- include('../../partials/head' , { title: 'Edit Experience' }) %>
     <%- include('../../partials/sidebar') %>
         <%- include('../../partials/header') %>
 
@@ -8,50 +8,50 @@
                     <div class="row align-items-center mb-3">
                         <div class="col-6">
                             <div class="h2">
-                                Add Education
+                                Edit experience
                             </div>
                         </div>
                     </div>
-                    <form action="/admin/education/update" method="POST">
+                    <form action="/admin/experience/update" method="POST">
 
-                        <input type="hidden" name="id" value="<%= education.id %>">
+                        <input type="hidden" name="id" value="<%= experience.id %>">
 
                         <div class="mb-3">
-                          <label for="school" class="form-label">School:</label>
-                          <input type="text" id="school" name="school" class="form-control" required value="<%= education.school %>">
+                          <label for="school" class="form-label">Company:</label>
+                          <input type="text" id="company" name="company" class="form-control" required value="<%= experience.company %>">
                         </div>
                 
                         <div class="mb-3">
-                          <label for="degree" class="form-label">Degree:</label>
-                          <input type="text" id="degree" name="degree" class="form-control" required value="<%= education.degree %>">
+                          <label for="degree" class="form-label">Title:</label>
+                          <input type="text" id="title" name="title" class="form-control" required value="<%= experience.title %>">
                         </div>
                 
                         <div class="mb-3">
-                          <label for="fieldOfStudy" class="form-label">Field of Study:</label>
-                          <input type="text" id="fieldOfStudy" name="fieldOfStudy" class="form-control" required value="<%= education.fieldOfStudy %>">
+                          <label for="fieldOfStudy" class="form-label">Location:</label>
+                          <input type="text" id="location" name="location" class="form-control" required value="<%= experience.location %>">
                         </div>
                 
                         <div class="mb-3">
                             <label for="startDate" class="form-label">Start Date:</label>
-                            <% const startDate = new Date(education.startDate); %>
+                            <% const startDate = new Date(experience.startDate); %>
                             <% const startDateString = startDate.toISOString().substr(0, 10); %>
                             <input type="date" id="startDate" name="startDate" class="form-control" required value="<%= startDateString %>">
                         </div>
                           
                         <div class="mb-3">
                             <label for="startDate" class="form-label">End Date:</label>
-                            <% const endDate = new Date(education.endDate); %>
+                            <% const endDate = new Date(experience.endDate); %>
                             <% const endDateString = endDate.toISOString().substr(0, 10); %>
                             <input type="date" id="endDate" name="endDate" class="form-control" required value="<%= endDateString %>">
                         </div>
 
                         <div class="mb-3">
                           <label for="description" class="form-label">Description:</label>
-                          <textarea id="description" name="description" rows="20" class="form-control"><%= education.description %></textarea>
+                          <textarea id="description" name="description" rows="20" class="form-control"><%= experience.description %></textarea>
                         </div>
                 
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Update Education</button>
+                            <button type="submit" class="btn btn-primary">Update experience</button>
                         </div>
                        
                       </form>
