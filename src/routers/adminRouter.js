@@ -8,6 +8,7 @@ const adminEducationRouter = require('./adminEducations')
 const adminExperienceRouter = require('./adminExperiences')
 const adminProjectRouter = require('./adminProjects')
 const Activities = require('../models/activities')
+const moment = require('moment');
 
 router.get('/', auth, (req,res) => {
     res.send('This is admin page')
@@ -22,7 +23,7 @@ router.get('/profile', auth, async(req,res) => {
         ]
     })
 
-    res.render('admin/views/profile/profile', {user})
+    res.render('admin/views/profile/profile', {user, moment})
 
 })
 

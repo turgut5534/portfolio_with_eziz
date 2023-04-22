@@ -92,15 +92,12 @@
                                             <img src="img/avatars/avatar-2.jpg" width="36" height="36"
                                                 class="rounded-circle me-2" alt="William Harris">
                                             <div class="flex-grow-1">
-                                                <small class="float-end text-navy">1d ago</small>
+                                                <small class="float-end text-navy"><%= moment(a.createdAt).fromNow() %></small>
+
                                                 <%= a.action %><br />
-                                                <small class="text-muted">Yesterday 3:12 pm</small>
     
-                                                <div class="d-flex align-items-start mt-1">
-                                                    <a class="pe-3" href="#">
-                                                        <img src="img/avatars/avatar-4.jpg" width="36" height="36"
-                                                            class="rounded-circle me-2" alt="Christina Mason">
-                                                    </a>
+                                                <div class="d-flex align-items-start mt-2">
+
                                                     <div class="flex-grow-1">
                                                         <div class="border text-sm text-muted p-2 mt-1">
                                                             <%= a.description %>
