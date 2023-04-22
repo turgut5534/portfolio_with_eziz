@@ -61,7 +61,9 @@ router.get('/login', checkConnection,  (req,res) => {
 router.post('/login', checkConnection ,async(req,res) => {
 
     try {
-        const user = await User.findOne({where: {email: req.body.email}})
+
+        const email = req.body.email.trim();
+        const user = await User.findOne({where: {email: email}})
         
         if(!user) {
             return res.status(401).json({error: "Incorrect email or password!"})
