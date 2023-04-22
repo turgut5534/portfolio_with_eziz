@@ -32,6 +32,7 @@ $('body').on('submit','#skill-save-form', function(e) {
         button.html('Save')
         $('#addSkillModal').modal('hide')
         $('.modal-backdrop').remove();
+        $('#skill-save-form')[0].reset();
 
         },
         error: function(e) {
@@ -267,6 +268,7 @@ $('body').on('submit','#category-save-form', function(e) {
         button.html('Save')
         $('#addCategoryModal').modal('hide')
         $('.modal-backdrop').remove();
+        $('#category-save-form')[0].reset();
 
         },
         error: function(e) {
