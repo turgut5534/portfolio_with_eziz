@@ -54,7 +54,7 @@ router.get('/edit/:id', auth, async(req,res) => {
         })
 
         const categories = await Category.findAll()
-        res.render('admin/views/project/edit-Project', {project, categories})
+        res.render('admin/views/project/edit-project', {project, categories})
     } catch(e) {
         console.log(e)
     }
