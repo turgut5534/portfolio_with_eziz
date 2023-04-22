@@ -29,7 +29,7 @@
           <div class="col-lg-4 portfolio-info">
             <h3>Project information</h3>
             <ul>
-              <li><strong>Category:</strong> <%= project.categories.map(c => c.name).join(', ') %></li>
+              <li><strong>Category:</strong> <%= project.project_categories.map(c => c.category.name).join(', ') %></li>
               <li><strong>Client</strong>: <%= project.client %></li>
               <li><strong>Project date</strong>: <%= project.date.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %>
               </li>

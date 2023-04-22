@@ -11,10 +11,12 @@ const Category = require('../models/categories')
 const ProjectFiles = require('../models/projectFiles')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
-const auth = require('../middlewares/auth')
 const ProjectCategories = require('../models/projectCategories')
+const checkConnection = require('../middlewares/checkConnection')
+const Services = require('../models/services')
+const Notification = require('../models/notifications')
 
-router.get('/', async(req,res) => {
+router.get('/', checkConnection ,async(req,res) => {
 
     try {
         const user = await User.findOne({
@@ -22,6 +24,7 @@ router.get('/', async(req,res) => {
               { model: Skill },
               { model: Education },
               { model: Experience },
+              {model: Services},
               {
                 model: Project,
                 include: [
@@ -33,15 +36,17 @@ router.get('/', async(req,res) => {
               },
             ],
           });
+
+          const categories = await Category.findAll()
           
-        res.render('site/views/index', {user})
+        res.render('site/views/index', {user, categories})
     } catch(e) {
         console.log(e)
     }
    
 })
 
-router.get('/login', (req,res) => {
+router.get('/login', checkConnection,  (req,res) => {
     
     // const token = req.cookies.token
 
@@ -53,10 +58,12 @@ router.get('/login', (req,res) => {
     res.render('site/views/login')
 })
 
-router.post('/login', async(req,res) => {
+router.post('/login', checkConnection ,async(req,res) => {
 
     try {
-        const user = await User.findOne({where: {email: req.body.email}})
+
+        const email = req.body.email.trim();
+        const user = await User.findOne({where: {email: email}})
         
         if(!user) {
             return res.status(401).json({error: "Incorrect email or password!"})
@@ -105,6 +112,17 @@ router.post('/contact', async(req,res) => {
 
     try {
         await email.sendMail(message)
+        const user = await User.findOne()
+        
+        const notification = new Notification({
+            message: `You have a new email from ${req.body.name}`,
+            type: "contact",
+            is_read: false,
+            UserId: user.id
+        })
+
+        await notification.save()
+
         res.status(200).send()
     } catch(e) {
         console.log(e)
@@ -113,13 +131,16 @@ router.post('/contact', async(req,res) => {
 
 })
 
-router.get('/detail/:id', async(req,res) => {
+router.get('/detail/:id', checkConnection , async(req,res) => {
     
     try {
         const user = await User.findOne()
         const project = await Project.findByPk(req.params.id, {
             include: [
-                {model: Category},
+                {
+                   model: ProjectCategories,
+                   include: [Category]
+                },
                 {model: ProjectFiles}
             ]
         })
@@ -143,5 +164,7 @@ router.post('/user/save', async(req,res) => {
     }
 
 })
+
+
 
 module.exports = router

@@ -5,6 +5,8 @@ const Experience = require('./experience')
 const Education = require('./education');
 const Project = require('./projects');
 const Activities = require('./activities');
+const Services = require('./services');
+const Notifications = require('./notifications')
 
 const User = sequelize.define('User', {
     name: {
@@ -53,11 +55,16 @@ const User = sequelize.define('User', {
   User.hasMany(Experience);
   User.hasMany(Project);
   User.hasMany(Activities)
+  User.hasMany(Services)
+  User.hasMany(Notifications)
+
   Skill.belongsTo(User);
   Education.belongsTo(User)
   Experience.belongsTo(User)
   Project.belongsTo(User)
   Activities.belongsTo(User)
+  Services.belongsTo(User)
+  Notifications.belongsTo(User)
 
   // sequelize.sync()
 

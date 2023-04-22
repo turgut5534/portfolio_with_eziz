@@ -1,0 +1,44 @@
+<%- include('../../partials/head' , { title: 'Add Service' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Add Service
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/admin/service/save" method="POST">
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Icon:</label>
+                            <select class="form-control" name="icon" id="">
+                                <option value="bx bx-file">bx bx-file</option>
+                                <option value="bx bx-tachometer">bx bx-tachometer</option>
+                                <option value="bx bx-world">bx bx-world</option>
+                                <option value="bx bx-slideshow">bx bx-slideshow</option>
+                                <option value="bx bx-arch">bx bx-arch</option>
+                              </select>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="title" class="form-label">Title:</label>
+                          <input type="text" id="title" name="title" class="form-control" required>
+                        </div>
+                
+                        <div class="mb-3">
+                          <label for="degree" class="form-label">Description:</label>
+                          <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
+                        </div>
+                
+                        <button type="submit" class="btn btn-primary">Add Service</button>
+                      </form>
+                      
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>

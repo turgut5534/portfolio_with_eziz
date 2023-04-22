@@ -1193,3 +1193,7 @@ body {
   .credits a:hover {
     color: #fff;
   }
+
+  .bold {
+    font-weight: bold;
+  }

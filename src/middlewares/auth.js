@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const Notification = require('../models/notifications')
+const moment = require('moment')
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -11,11 +13,15 @@ const authMiddleware = async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET)
     const userId = decoded.userId
 
-    // You can use the userId to retrieve the user from the database and attach it to the request object
     const user = await User.findByPk(userId)
     req.user = user
 
     res.locals.user = user
+
+    const notifications = await Notification.findAll({ where: { UserId: user.id } })
+
+    res.locals.notifications = notifications
+    res.locals.moment = moment
 
     next()
   } catch (err) {
