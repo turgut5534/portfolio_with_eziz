@@ -82,8 +82,13 @@ router.post('/profile/save', auth, upload.single('image'), async(req,res) => {
 
     if (req.file) {
 
-        const path = uploadDirectory + '/' + user.image
-        await fs.promises.unlink(path)
+        try {
+            const path = uploadDirectory + '/' + user.image
+            await fs.promises.unlink(path)
+        } catch(e) {
+            console.log('it is okay')
+        }
+ 
 
         user.image = req.file.filename
     }
