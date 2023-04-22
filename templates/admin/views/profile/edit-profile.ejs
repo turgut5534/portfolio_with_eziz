@@ -1,0 +1,86 @@
+<%- include('../../partials/head' , { title: 'Edit Profile' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Edit Profile
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/admin/profile/save" method="POST">
+
+                        <div class="mb-3">
+                            <label for="school" class="form-label">Profile Image:</label>
+                            <input type="file" id="name" name="image" class="form-control">
+                          </div>
+
+                        <div class="mb-3">
+                          <label for="school" class="form-label">Name:</label>
+                          <input type="text" id="name" name="name" class="form-control" required value="<%= user.name %>">
+                        </div>
+                
+                        <div class="mb-3">
+                          <label for="degree" class="form-label">Email:</label>
+                          <input type="text" id="email" name="email" class="form-control" required value="<%= user.email %>">
+                        </div>
+                
+                        <div class="mb-3">
+                          <label for="fieldOfStudy" class="form-label">Phone:</label>
+                          <input type="text" id="phone" name="phone" class="form-control" required value="<%= user.phone %>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fieldOfStudy" class="form-label">Linkedin:</label>
+                            <input type="text" id="phone" name="linkedin" class="form-control" required value="<%= user.linkedin %>">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="fieldOfStudy" class="form-label">Instagram:</label>
+                            <input type="text" id="phone" name="instagram" class="form-control" required value="<%= user.instagram %>">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="fieldOfStudy" class="form-label">Github:</label>
+                            <input type="text" id="phone" name="github" class="form-control" required value="<%= user.github %>">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="fieldOfStudy" class="form-label">Website:</label>
+                            <input type="text" id="phone" name="website" class="form-control" required value="<%= user.website %>">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="fieldOfStudy" class="form-label">Degree:</label>
+                            <input type="text" id="phone" name="degree" class="form-control" required value="<%= user.degree %>">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="startDate" class="form-label">Birthday:</label>
+                            <% const birthDate = new Date(user.birthday); %>
+                            <% const birthDateString = birthDate.toISOString().substr(0, 10); %>
+                            <input type="date" id="startDate" name="birthday" class="form-control" required value="<%= birthDateString %>">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="fieldOfStudy" class="form-label">Address:</label>
+                            <textarea class="form-control" name="address" id="" cols="30" rows="5"><%= user.address %></textarea>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="fieldOfStudy" class="form-label">About:</label>
+                            <textarea class="form-control" name="address" id="" cols="30" rows="10"><%= user.about %></textarea>
+                          </div>
+                
+                
+                        <button type="submit" class="btn btn-primary">Add Experience</button>
+                      </form>
+                      
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>

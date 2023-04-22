@@ -11,10 +11,10 @@ const Category = require('../models/categories')
 const ProjectFiles = require('../models/projectFiles')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
-const auth = require('../middlewares/auth')
 const ProjectCategories = require('../models/projectCategories')
+const checkConnection = require('../middlewares/checkConnection')
 
-router.get('/', async(req,res) => {
+router.get('/', checkConnection ,async(req,res) => {
 
     try {
         const user = await User.findOne({
@@ -41,7 +41,7 @@ router.get('/', async(req,res) => {
    
 })
 
-router.get('/login', (req,res) => {
+router.get('/login', checkConnection,  (req,res) => {
     
     // const token = req.cookies.token
 
@@ -53,7 +53,7 @@ router.get('/login', (req,res) => {
     res.render('site/views/login')
 })
 
-router.post('/login', async(req,res) => {
+router.post('/login', checkConnection ,async(req,res) => {
 
     try {
         const user = await User.findOne({where: {email: req.body.email}})
@@ -113,7 +113,7 @@ router.post('/contact', async(req,res) => {
 
 })
 
-router.get('/detail/:id', async(req,res) => {
+router.get('/detail/:id', checkConnection , async(req,res) => {
     
     try {
         const user = await User.findOne()

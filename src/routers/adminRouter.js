@@ -27,6 +27,42 @@ router.get('/profile', auth, async(req,res) => {
 
 })
 
+router.get('/profile/edit', auth, async(req,res) => {
+
+    const user = await User.findOne({
+        include: [
+            {model: Skill},
+            {model: Activities}
+        ]
+    })
+
+    res.render('admin/views/profile/edit-profile', {user})
+
+})
+
+router.post('/profile/save', auth, async(req,res) => {
+
+    const user = await User.findOne()
+
+    user.name = req.body.name
+    user.email = req.body.email
+    user.phone = req.body.phone
+    user.github = req.body.github
+    user.instagram = req.body.instagram
+    user.linkedin = req.body.linkedin
+    user.birthday = req.body.birthday
+    user.degree = req.body.degree
+    user.website = req.body.website
+    // user.address = req.body.address
+    user.about = req.body.about
+
+    await user.save()
+
+    res.redirect('/admin/profile')
+
+})
+
+
 router.use('/skills', adminSkillsRouter)
 router.use('/education', adminEducationRouter)
 router.use('/experience', adminExperienceRouter)
