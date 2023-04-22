@@ -22,6 +22,7 @@ const authMiddleware = async (req, res, next) => {
 
     res.locals.notifications = notifications
     res.locals.moment = moment
+    res.locals.lastUrl = req.originalUrl.split('/')[2]
 
     next()
   } catch (err) {

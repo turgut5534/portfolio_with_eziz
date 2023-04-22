@@ -56,7 +56,7 @@ router.get('/profile', auth, async(req,res) => {
 
 })
 
-router.get('/profile/edit', auth, async(req,res) => {
+router.get('/edit-profile', auth, async(req,res) => {
 
     const user = await User.findOne({
         include: [
