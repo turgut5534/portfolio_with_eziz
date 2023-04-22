@@ -3,14 +3,3 @@
     top: 0;
     right: 0;
   }
-
-  .img-container {
-    height: 100% !important;
-    width: 300px !important;
-    
-  }
-  .img-container img {
-    width: 100%;
-   
-    object-fit: contain;
-  }
