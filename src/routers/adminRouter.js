@@ -37,6 +37,9 @@ router.get('/', auth, (req,res) => {
 
 router.get('/profile', auth, async(req,res) => {
 
+    const url = req.headers.host 
+    console.log(url)
+
     const user = await User.findOne({
         include: [
             {model: Skill},
@@ -48,7 +51,7 @@ router.get('/profile', auth, async(req,res) => {
         ]
     })
 
-    res.render('admin/views/profile/profile', {user, moment})
+    res.render('admin/views/profile/profile', {user, url})
 
 })
 
