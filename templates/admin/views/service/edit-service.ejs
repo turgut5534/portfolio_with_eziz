@@ -17,6 +17,17 @@
                         <input type="hidden" name="id" value="<%= service.id %>">
 
                         <div class="mb-3">
+                            <label for="title" class="form-label">Icon:</label>
+                            <select class="form-control" name="icon" id="">
+                                <option <% if(service.icon == 'bx bx-file' ) { %> selected <% }%> value="bx bx-file">bx bx-file</option>
+                                <option <% if(service.icon == 'bx bx-tachometer' ) { %> selected <% }%> value="bx bx-tachometer">bx bx-tachometer</option>
+                                <option <% if(service.icon == 'bx bx-world' ) { %> selected <% }%> value="bx bx-world">bx bx-world</option>
+                                <option <% if(service.icon == 'bx bx-slideshow' ) { %> selected <% }%> value="bx bx-slideshow">bx bx-slideshow</option>
+                                <option <% if(service.icon == 'bx bx-arch' ) { %> selected <% }%> value="bx bx-arch">bx bx-arch</option>
+                              </select>
+                        </div>
+
+                        <div class="mb-3">
                           <label for="title" class="form-label">Title:</label>
                           <input type="text" id="title" name="title" class="form-control" required value="<%= service.title %>">
                         </div>

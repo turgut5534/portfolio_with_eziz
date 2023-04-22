@@ -13,6 +13,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const ProjectCategories = require('../models/projectCategories')
 const checkConnection = require('../middlewares/checkConnection')
+const Services = require('../models/services')
 
 router.get('/', checkConnection ,async(req,res) => {
 
@@ -22,6 +23,7 @@ router.get('/', checkConnection ,async(req,res) => {
               { model: Skill },
               { model: Education },
               { model: Experience },
+              {model: Services},
               {
                 model: Project,
                 include: [

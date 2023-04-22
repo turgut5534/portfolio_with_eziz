@@ -75,7 +75,7 @@ router.delete('/delete/:id', auth, async (req, res) => {
     await service.destroy()
 
     res.status(200).send()
-    
+
   } catch (e) {
     console.log(e)
     res.status(500).send()
@@ -94,6 +94,7 @@ router.post('/update', auth, async (req, res) => {
 
     service.title = req.body.title
     service.description = req.body.description
+    service.icon = req.body.icon
 
     await service.save()
 
