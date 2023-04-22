@@ -14,6 +14,7 @@ require('dotenv').config();
 const ProjectCategories = require('../models/projectCategories')
 const checkConnection = require('../middlewares/checkConnection')
 const Services = require('../models/services')
+const Notification = require('../models/notifications')
 
 router.get('/', checkConnection ,async(req,res) => {
 
@@ -109,6 +110,17 @@ router.post('/contact', async(req,res) => {
 
     try {
         await email.sendMail(message)
+        const user = await User.findOne()
+        
+        const notification = new Notification({
+            message: `You have a new email from ${req.body.name}`,
+            type: "contact",
+            is_read: false,
+            UserId: user.id
+        })
+
+        await notification.save()
+
         res.status(200).send()
     } catch(e) {
         console.log(e)

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const Notification = require('../models/notifications')
+const moment = require('moment')
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -15,6 +17,11 @@ const authMiddleware = async (req, res, next) => {
     req.user = user
 
     res.locals.user = user
+
+    const notifications = await Notification.findAll({ where: { UserId: user.id } })
+
+    res.locals.notifications = notifications
+    res.locals.moment = moment
 
     next()
   } catch (err) {
