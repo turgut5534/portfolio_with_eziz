@@ -8,28 +8,50 @@
     <title>Admin Login</title>
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/iziToast.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
   
-    <div class="login-box">
-        <h2>Login</h2>
-        <form action="/login" method="POST" id="login-form">
-          <div class="user-box">
-            <input type="text" name="email" required="">
-            <label>Username</label>
-          </div>
-          <div class="user-box">
-            <input type="password" name="password" required="">
-            <label>Password</label>
-          </div>
-          <button type="submit">Login</button>
-        </form>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form action="/login" method="POST" id="login-form">
+      <div class="user-box">
+        <label>Username</label>
+        <input type="text" name="email" required="">
       </div>
+      <div class="user-box">
+        <label>Password</label>
+        <div class='password-container'>
+          <input type="password" name="password" required="">
+          <i class="fa-sharp fa-solid fa-eye-slash"></i>
+        </div>
+      </div>
+      <button type="submit" class='login-button'>Login</button>
+    </form>
+  </div>
 
     <script src="/js/iziToast.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="/js/ajax.js"></script>
+    <script>
+      const myInput = document.querySelector('input[type="password"]');
+const toggleIcon = document.querySelector('.fa-eye-slash');
+
+
+
+toggleIcon.addEventListener('click', function() {
+  if (myInput.type === 'password') {
+    myInput.type = 'text';
+    toggleIcon.classList.remove('fa-eye');
+    toggleIcon.classList.add('fa-eye-slash');
+  } else {
+    myInput.type = 'password';
+    toggleIcon.classList.remove('fa-eye-slash');
+    toggleIcon.classList.add('fa-eye');
+  }
+});
+    </script>
 </body>
 
 </html>
