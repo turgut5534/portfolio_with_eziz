@@ -8,6 +8,7 @@ const adminEducationRouter = require('./adminEducations')
 const adminExperienceRouter = require('./adminExperiences')
 const adminProjectRouter = require('./adminProjects')
 const adminServiceRouter = require('./adminServices')
+const adminCategoryRouter = require('./adminCategories')
 const Activities = require('../models/activities')
 const moment = require('moment');
 const multer = require('multer');
@@ -112,5 +113,6 @@ router.use('/education', adminEducationRouter)
 router.use('/experience', adminExperienceRouter)
 router.use('/project', adminProjectRouter)
 router.use('/service', adminServiceRouter)
+router.use('/category', adminCategoryRouter)
 
 module.exports = router

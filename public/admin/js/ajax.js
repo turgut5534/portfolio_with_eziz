@@ -59,6 +59,18 @@ $('body').on('click', '.edit-skill', function(e) {
     
 })
 
+$('body').on('click', '.edit-category', function(e) {
+
+    e.preventDefault()
+
+    const id = $(this).data('id')
+    const title = $(this).data('title')
+        
+    $('#edit-category-id').val(id)
+    $('#category-title').val(title)
+    
+})
+
 
 $('body').on('submit','#skill-edit-form', function(e) {
 
@@ -97,6 +109,39 @@ $('body').on('submit','#skill-edit-form', function(e) {
     
 })
 
+
+$('body').on('submit','#category-edit-form', function(e) {
+
+    e.preventDefault()
+
+    const button = $('.save-category-button')
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        beforeSend: function() {
+            button.html('Updating...')
+        },
+        success: function(response) {
+
+            $('.category-name-h5-'+ response.category.id).html(response.category.name)
+      
+        $('#editCategoryModal').modal('hide')
+        $('.modal-backdrop').remove();
+        button.html('Update')
+
+        },
+        error: function(e) {
+            iziToast.error({
+                title: 'Error',
+                message: 'An error occured updating the data',
+            });
+            button.html('Update')
+        }
+    })
+    
+})
 
 $('body').on('click', '.delete-data', function(e) {
 
@@ -184,4 +229,53 @@ $('.delete-file').on('click', function() {
         }
       })
 
+})
+
+
+$('body').on('submit','#category-save-form', function(e) {
+
+    e.preventDefault()
+
+    const button = $('.save-category-button')
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        beforeSend: function() {
+            button.html('Saving...')
+        },
+        success: function(data) {
+
+            console.log(data.category.id)
+
+            $('.categories').append(`<div class="col-12 col-md-6 col-lg-4 category-${data.category.id}">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="capitalize card-title category-name-h5-${data.category.id}">
+                        ${data.category.name}
+                    </h5>
+                    <div class="d-flex justify-content-end">
+                        <a href="javascript:;"
+                            class="btn btn-sm btn-outline-secondary me-2 edit-category edit-category-${data.category.id}" data-id="${data.category.id}" data-title="${data.category.name}" data-bs-toggle="modal" data-bs-target="#editCategoryModal">Edit</a>
+                        <a href="javascript:;" data-data="category" data-href="/admin/category/delete/${data.category.id}" data-title="${data.category.name}" data-id="${data.category.id}" class="btn btn-sm btn-outline-danger delete-data">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>`)
+
+        button.html('Save')
+        $('#addCategoryModal').modal('hide')
+        $('.modal-backdrop').remove();
+
+        },
+        error: function(e) {
+            iziToast.error({
+                title: 'Error',
+                message: 'An error occured saving the data',
+            });
+            button.html('Save')
+        }
+    })
+    
 })
