@@ -11,7 +11,6 @@ const authMiddleware = async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET)
     const userId = decoded.userId
 
-    // You can use the userId to retrieve the user from the database and attach it to the request object
     const user = await User.findByPk(userId)
     req.user = user
 
