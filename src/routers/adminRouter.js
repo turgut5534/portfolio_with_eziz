@@ -10,6 +10,26 @@ const adminProjectRouter = require('./adminProjects')
 const adminServiceRouter = require('./adminServices')
 const Activities = require('../models/activities')
 const moment = require('moment');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs')
+const path = require('path')
+
+const uploadDirectory = path.join(__dirname, '../../uploads/user')
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/user/')
+    },
+    filename: function (req, file, cb) {
+      const uniqueId = uuidv4();
+      const ext = path.extname(file.originalname);
+      cb(null, uniqueId + ext);
+    }
+});
+  
+const upload = multer({ storage: storage });
 
 router.get('/', auth, (req,res) => {
     res.send('This is admin page')
@@ -41,21 +61,32 @@ router.get('/profile/edit', auth, async(req,res) => {
 
 })
 
-router.post('/profile/save', auth, async(req,res) => {
+router.post('/profile/save', auth, upload.single('image'), async(req,res) => {
 
     const user = await User.findOne()
 
-    user.name = req.body.name
-    user.email = req.body.email
-    user.phone = req.body.phone
-    user.github = req.body.github
-    user.instagram = req.body.instagram
-    user.linkedin = req.body.linkedin
-    user.birthday = req.body.birthday
-    user.degree = req.body.degree
-    user.website = req.body.website
+    const { name, email, phone, github, instagram, linkedin, birthday, degree, website, about } = req.body
+
+    user.name = name
+    user.email = email
+    user.phone = phone
+    user.github = github
+    user.instagram = instagram
+    user.linkedin = linkedin
+    user.birthday = birthday
+    user.degree = degree
+    user.website = website
     // user.address = req.body.address
     user.about = req.body.about
+    
+
+    if (req.file) {
+
+        const path = uploadDirectory + '/' + user.image
+        await fs.promises.unlink(path)
+
+        user.image = req.file.filename
+    }
 
     await user.save()
 
