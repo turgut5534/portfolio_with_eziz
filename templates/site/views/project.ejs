@@ -33,7 +33,7 @@
               <li><strong>Client</strong>: <%= project.client %></li>
               <li><strong>Project date</strong>: <%= project.date.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %>
               </li>
-              <li><strong>Project URL</strong>: <a href="<%= project.url %>"><%= project.url %></a></li>
+              <li><strong>Project URL</strong>: <a target="_blank" href="http://<%= project.url %>"><%= project.url %></a></li>
             </ul>
 
             <p><%= project.description %></p>
