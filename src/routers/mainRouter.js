@@ -119,7 +119,10 @@ router.get('/detail/:id', async(req,res) => {
         const user = await User.findOne()
         const project = await Project.findByPk(req.params.id, {
             include: [
-                {model: Category},
+                {
+                   model: ProjectCategories,
+                   include: [Category]
+                },
                 {model: ProjectFiles}
             ]
         })
