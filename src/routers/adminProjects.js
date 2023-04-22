@@ -37,9 +37,17 @@ router.get('/all', auth, async(req,res) => {
 
 })
 
-router.get('/add', auth, (req,res) => {
+router.get('/add', auth, async(req,res) => {
 
-    res.render('admin/views/project/add-project')
+    try {
+      
+      const categories = await Category.findAll()
+      res.render('admin/views/project/add-project', {categories})
+
+    } catch(e) {
+      
+    }
+    
 
 })
 
@@ -83,7 +91,7 @@ router.delete('/projectfile/delete/:id', async(req,res) => {
 
 router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'files[]', maxCount: 10 }]), async (req, res) => {
     try {
-      const { title, client, url, date, description } = req.body;
+      const { title, client, url, date, description, categories } = req.body;
       let image = null;
       let files = [];
   
@@ -98,6 +106,18 @@ router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name
       });
       project.UserId = req.user.id;
       await project.save();
+
+      if(categories) {
+
+        for(const category of categories) {
+  
+            await ProjectCategories.create({
+                categoryId: category,
+                projectId: project.id
+            })
+
+        }
+      }
 
       if (req.files['files[]']) {
 
@@ -232,8 +252,13 @@ router.delete('/delete/:id', async(req,res) => {
 
         if(project.image) {
 
-            const path = uploadDirectory + '/' + project.image
-            await fs.promises.unlink(path)
+            try {
+              const path = uploadDirectory + '/' + project.image
+              await fs.promises.unlink(path)
+            } catch(e) {
+              console.log('The file not exist')
+            }
+       
             
         }
 
