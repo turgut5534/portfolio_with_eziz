@@ -1,0 +1,51 @@
+<%- include('../../partials/head' , { title: 'Services' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Services
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <a class="btn btn-success" href="/admin/service/add">
+                                +Add
+                            </a>
+                        </div>
+                    </div>
+
+                   
+                    <div class="row services">
+                        <% if (services.length > 0) { %>
+                          <% services.forEach((service) => { %>
+                            <div class="col-12 col-md-6 col-lg-4 service-<%= service.id %>">
+                              <div class="card mb-4">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%= service.title %></h5>
+                                  <h6 class="card-subtitle mb-2 text-muted"><%= service.degree %></h6>
+                                  <% if (service.description) { %>
+                                    <p class="card-text"><%= service.description %></p>
+                                  <% } %>
+                                  <div class="d-flex justify-content-end">
+                                    <a href="/admin/service/edit/<%= service.id %>" class="btn btn-sm btn-outline-secondary me-2 edit-service">Edit</a>
+                                    <a href="javascript:;" data-data="service" data-title="<%= service.school %>" data-href="/admin/service/delete/<%= service.id %>" class="btn btn-sm btn-outline-danger delete-data" data-id="<%= service.id %>">Delete</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% }) %>
+                        <% } else { %>
+                          <div class="col-12 d-flex justify-content-center align-items-center mt-3">
+                            <p class="h4">You have no service</p>
+                          </div>
+                        <% } %>
+                      </div>
+                      
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>

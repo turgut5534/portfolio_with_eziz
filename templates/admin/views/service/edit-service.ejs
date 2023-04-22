@@ -1,0 +1,35 @@
+<%- include('../../partials/head' , { title: 'Edit Service' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Edit Service
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/admin/service/update" method="POST">
+
+                        <input type="hidden" name="id" value="<%= service.id %>">
+
+                        <div class="mb-3">
+                          <label for="title" class="form-label">Title:</label>
+                          <input type="text" id="title" name="title" class="form-control" required value="<%= service.title %>">
+                        </div>
+                
+                        <div class="mb-3">
+                          <label for="degree" class="form-label">Description:</label>
+                          <textarea class="form-control" name="description" id="description" cols="30" rows="10"><%= service.description %></textarea>
+                        </div>
+                
+                        <button type="submit" class="btn btn-primary">Add Service</button>
+                      </form>
+                      
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>
