@@ -25,7 +25,7 @@
                             <div class="col-12 col-md-6 col-lg-4 service-<%= service.id %>">
                               <div class="card mb-4">
                                 <div class="card-body">
-                                  <h5 class="card-title"><%= service.title %></h5>
+                                  <h5 class="card-title"><i style="font-size: 20px;" class="<%= service.icon %>"></i><%= service.title %></h5>
                                   <h6 class="card-subtitle mb-2 text-muted"><%= service.degree %></h6>
                                   <% if (service.description) { %>
                                     <p class="card-text"><%= service.description %></p>
