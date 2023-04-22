@@ -61,4 +61,16 @@ html {
     color: #03e9f4;
     font-size: 12px;
   }
-  
+
+button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    transition: 0.2s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
