@@ -40,7 +40,11 @@ router.get('/profile', auth, async(req,res) => {
     const user = await User.findOne({
         include: [
             {model: Skill},
-            {model: Activities}
+            {
+                model: Activities,
+                order: [['createdAt', 'DESC']],
+                limit: 10,
+            }
         ]
     })
 
