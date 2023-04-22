@@ -35,8 +35,10 @@ router.get('/', checkConnection ,async(req,res) => {
               },
             ],
           });
+
+          const categories = await Category.findAll()
           
-        res.render('site/views/index', {user})
+        res.render('site/views/index', {user, categories})
     } catch(e) {
         console.log(e)
     }
