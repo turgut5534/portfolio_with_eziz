@@ -16,28 +16,32 @@
 
                 <form action="/user/save" method="POST" id="user-save-form">
 
+                    <div class="mb-5">
+                        <h2>Create First User</h2>
+                    </div>
+
                     <div class="mb-3">
                         <label for="">Name:</label>
-                        <input class="form-control" type="text" name="name">
+                        <input class="form-control" type="text" name="name" required>
                     </div>
     
                     <div class="mb-3">
                         <label for="">Email:</label>
-                        <input class="form-control" type="text" name="email">
+                        <input class="form-control" type="text" name="email" required>
                     </div>
     
                     <div class="mb-3">
                         <label for="">Password:</label>
-                        <input class="form-control" type="password" name="password">
+                        <input class="form-control" type="password" name="password" required>
                     </div>
     
                     <div class="mb-3">
                         <label for="">Password Again:</label>
-                        <input class="form-control" type="password" name="repassword">
+                        <input class="form-control" type="password" name="repassword" required>
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary user-save-button">Save</button>
+                        <button type="submit" class="btn btn-primary user-save-button">Save User</button>
                     </div>
                     
                 </form>
