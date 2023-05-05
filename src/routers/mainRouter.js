@@ -105,8 +105,8 @@ router.get('/logout', (req, res) => {
 router.post('/contact', async(req,res) => {
 
     const message = {
-        from: 'turgut@turgutsalgin.site',
-        to: 'turgutsalgin5534@gmail.com',
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_TO,
         subject: 'A New Message From Portfolio',
         text: req.body.message,
         html: `<p><b>From:</b> ${req.body.name}</p>
