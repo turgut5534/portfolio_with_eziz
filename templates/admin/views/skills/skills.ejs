@@ -19,23 +19,29 @@
                     </div>
 
                     <div class="row skills">
-                        <% skills.forEach((skill)=> { %>
-                            <div class="col-12 col-md-6 col-lg-4 skill-<%= skill.id %>">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title skill-title-h5-<%= skill.id %>">
-                                            <%= skill.title %>
-                                        </h5>
-                                        <h5 class="skill-rate-h5-<%= skill.id %>"><%= skill.rate %></h5>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="javascript:;"
-                                                class="btn btn-sm btn-outline-secondary me-2 edit-skill edit-skill-<%= skill.id %>" data-id="<%= skill.id %>" data-title="<%= skill.title %>" data-rate="<%= skill.rate %>" data- data-bs-toggle="modal" data-bs-target="#editSkillModal">Edit</a>
-                                            <a href="javascript:;" data-data="skill" data-href="/admin/skills/delete/<%= skill.id %>" data-title="<%= skill.title %>" data-id="<%= skill.id %>" class="btn btn-sm btn-outline-danger delete-data">Delete</a>
+                        <% if(skills.length) { %>
+                            <% skills.forEach((skill)=> { %>
+                                <div class="col-12 col-md-6 col-lg-4 skill-<%= skill.id %>">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h5 class="card-title skill-title-h5-<%= skill.id %>">
+                                                <%= skill.title %>
+                                            </h5>
+                                            <h5 class="skill-rate-h5-<%= skill.id %>"><%= skill.rate %></h5>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:;"
+                                                    class="btn btn-sm btn-outline-secondary me-2 edit-skill edit-skill-<%= skill.id %>" data-id="<%= skill.id %>" data-title="<%= skill.title %>" data-rate="<%= skill.rate %>" data- data-bs-toggle="modal" data-bs-target="#editSkillModal">Edit</a>
+                                                <a href="javascript:;" data-data="skill" data-href="/admin/skills/delete/<%= skill.id %>" data-title="<%= skill.title %>" data-id="<%= skill.id %>" class="btn btn-sm btn-outline-danger delete-data">Delete</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             <% }) %>
+                        <% } else {%>
+                            <div class="col-12 d-flex justify-content-center align-items-center mt-3">
+                                <p class="h4">You have no skills</p>
+                              </div>
+                        <% } %>
                     </div>
                 </div>
             </main>

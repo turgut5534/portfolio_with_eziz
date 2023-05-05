@@ -2,8 +2,6 @@
   <div class="container">
 
     <h1><a href="/">Turgut Salgın</a></h1>
-    <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
     <h2>I'm a backend developer, let's create something amazing together!</h2>
 
     <nav id="navbar" class="navbar">
@@ -19,9 +17,9 @@
     </nav><!-- .navbar -->
 
     <div class="social-links">
-      <a href="<%= user.instagram %>" class="instagram"><i class="bi bi-instagram"></i></a>
-      <a href="<%= user.github %>" class="google-plus"><i class="bi bi-github"></i></a>
-      <a href="<%= user.linkedin %>" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      <a href="<%= user? user.instagram : '' %>" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="<%= user? user.github : '' %>" class="google-plus"><i class="bi bi-github"></i></a>
+      <a href="<%= user? user.linkedin : '' %>" class="linkedin"><i class="bi bi-linkedin"></i></a>
     </div>
 
   </div>

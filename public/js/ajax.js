@@ -64,3 +64,44 @@ $('#login-form').on('submit', function(e) {
     })
     
 })
+
+
+$('#user-save-form').on('submit', function(e) {
+
+    e.preventDefault()
+
+    const button = $('.user-save-button')
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        beforeSend: function() {
+            button.html('Saving...')
+        },
+        success: function(data) {
+            
+            iziToast.success({
+                title: 'OK',
+                message: data.message,
+            });
+            button.html('Send')
+            
+            setTimeout(() => {
+                location.href = '/login'
+            }, 1500);
+
+        },
+        error: function(e) {
+
+            var response = JSON.parse(e.responseText);
+            
+            iziToast.error({
+                title: 'Error',
+                message: response.message,
+            });
+            button.html('Save')
+        }
+    })
+    
+})

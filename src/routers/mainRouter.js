@@ -15,6 +15,7 @@ const ProjectCategories = require('../models/projectCategories')
 const checkConnection = require('../middlewares/checkConnection')
 const Services = require('../models/services')
 const Notification = require('../models/notifications')
+const validator = require('validator')
 
 router.get('/', checkConnection ,async(req,res) => {
 
@@ -36,6 +37,10 @@ router.get('/', checkConnection ,async(req,res) => {
               },
             ],
           });
+
+          if(!user) {
+            return res.render('site/views/create-user')
+          }
 
           const categories = await Category.findAll()
           
@@ -152,15 +157,40 @@ router.get('/detail/:id', checkConnection , async(req,res) => {
 })
 
 router.post('/user/save', async(req,res) => {
-
-    const user = req.body
     
     try {
-        user.password = await bcrypt.hash(user.password, 10);
-        await User.create(user)
-        res.status(201).send()
+
+        const { name, email, password, repassword } = req.body
+
+        if(!validator.isEmail(email)) {
+            return res.status(400).json({
+                status: false,
+                message: 'Email should be in correct format'
+            })
+        }
+
+        if(password != repassword) {
+            
+            return res.status(400).json({
+                status: false,
+                message: 'Password not match'
+            })
+        }
+
+        const user = new User({name,email, password})
+        user.password = await bcrypt.hash(password, 10)
+        await user.save()
+
+        res.status(201).json({
+            status: true,
+            message: 'Success!'
+        })
     } catch(e) {
         console.log(e)
+        res.status(400).json({
+            status: false,
+            message: 'An error occured'
+        })
     }
 
 })

@@ -15,7 +15,8 @@
     "sequelize": "^6.31.0",
     "sharp": "^0.32.1",
     "slugify": "^1.6.6",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "validator": "^13.9.0"
   },
   "name": "portfolio_with_eziz",
   "version": "1.0.0",
