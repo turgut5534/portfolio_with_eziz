@@ -163,9 +163,14 @@ router.post('/update', auth,  upload.fields([{ name: 'image', maxCount: 1 }, { n
    
         if (req.files['image']) {
 
-            const path = uploadDirectory + '/' + project.image
-            await fs.promises.unlink(path)
-            
+            try{
+              const path = uploadDirectory + '/' + project.image
+              await fs.promises.unlink(path)
+              
+            } catch(e) {
+              console.log(e)
+            }
+
             image = req.files['image'][0].filename;
             project.image = image
         }
