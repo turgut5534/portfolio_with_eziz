@@ -66,7 +66,7 @@ const User = sequelize.define('User', {
   Services.belongsTo(User)
   Notifications.belongsTo(User)
 
-  // sequelize.sync()
+  sequelize.sync()
 
   module.exports = User
   

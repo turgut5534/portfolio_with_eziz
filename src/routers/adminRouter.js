@@ -15,6 +15,7 @@ const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
 const path = require('path')
+const compressImages = require('../middlewares/compressImages')
 
 const uploadDirectory = path.join(__dirname, '../../uploads/user')
 
@@ -69,7 +70,7 @@ router.get('/edit-profile', auth, async(req,res) => {
 
 })
 
-router.post('/profile/save', auth, upload.single('image'), async(req,res) => {
+router.post('/profile/save', auth, upload.single('image'), compressImages ,async(req,res) => {
 
     const user = await User.findOne()
 

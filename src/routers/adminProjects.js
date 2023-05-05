@@ -10,6 +10,7 @@ const fs = require('fs')
 const ProjectFiles = require('../models/projectFiles');
 const ProjectCategories = require('../models/projectCategories');
 const Category = require('../models/categories');
+const compressMultipleImages = require('../middlewares/compressImagesMultiple')
 
 const uploadDirectory = path.join(__dirname, '../../uploads')
 
@@ -89,7 +90,7 @@ router.delete('/projectfile/delete/:id', async(req,res) => {
 
 })
 
-router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'files[]', maxCount: 10 }]), async (req, res) => {
+router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'files[]', maxCount: 10 }]), compressMultipleImages, async (req, res) => {
     try {
       const { title, client, url, date, description, categories } = req.body;
       let image = null;
