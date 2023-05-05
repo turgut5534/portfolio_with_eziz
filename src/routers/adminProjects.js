@@ -141,7 +141,7 @@ router.post('/save', auth, upload.fields([{ name: 'image', maxCount: 1 }, { name
     }
   });
 
-router.post('/update', auth,  upload.fields([{ name: 'image', maxCount: 1 }, { name: 'files[]', maxCount: 10 }]),  async(req,res) => {
+router.post('/update', auth,  upload.fields([{ name: 'image', maxCount: 1 }, { name: 'files[]', maxCount: 10 }]), compressMultipleImages , async(req,res) => {
 
     try {
 
