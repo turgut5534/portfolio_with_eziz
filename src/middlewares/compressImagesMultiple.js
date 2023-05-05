@@ -37,7 +37,8 @@ const compressImage = async (req, res, next) => {
         return next(err);
       }
     }
-    else if (req.files['image']) {
+    
+    if (req.files['image']) {
       try {
         // Iterate through each uploaded file
         for (let i = 0; i < req.files['image'].length; i++) {
