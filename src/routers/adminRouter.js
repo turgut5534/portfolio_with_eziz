@@ -85,7 +85,7 @@ router.post('/profile/save', auth, upload.single('image'), compressImages ,async
     user.birthday = birthday
     user.degree = degree
     user.website = website
-    // user.address = req.body.address
+    user.address = req.body.address
     user.about = req.body.about
     
 

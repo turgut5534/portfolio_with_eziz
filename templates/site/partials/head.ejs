@@ -22,6 +22,37 @@
     <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
+
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Person",
+            "name": "<%= user.name %>",
+            "url": "https://www.turgutsalgin.site",
+            "image": "https://turgutsalgin.site/users/<%= user.image %>",
+            "jobTitle": "Backend Developer",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Freelance"
+            },
+            "description": "I'm a freelance backend developer specializing in web application development.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Czestochowa",
+              "addressRegion": "CZ",
+              "postalCode": "42200",
+              "addressCountry": "PL"
+            },
+            "telephone": "<%= user.phone %>",
+            "email": "<%= user.email %>",
+            "sameAs": [
+              "https://<%= user.linkedin %>",
+              "https://<%= user.github %>",
+              "https://<%= user.instagram %>"
+            ]
+          }          
+      </script>
+
 </head>
 <body>
     

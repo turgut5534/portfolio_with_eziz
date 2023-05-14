@@ -46,4 +46,37 @@
 
   </main><!-- End #main -->
 
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "<%= project.title %>",
+      "description": "Description of the project",
+      "url": "https://<%= project.url %>",
+      "applicationCategory": "<%= project.project_categories.map(c => c.category.name).join(', ') %>",
+      "operatingSystem": "Cross-platform",
+      "programmingLanguage": ["Javascript"],
+      "version": "1.0.0",
+      "datePublished": "<%= project.createdAt %>",
+      "dateModified": "<%= project.updatedAt %>",
+      "author": {
+        "@type": "Person",
+        "name": "<%= user.name %>",
+        "url": "https://turgutsalgin.site",
+        "image": "https://turgutsalgin.site/<%= user.image %>"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "<%= user.name %>",
+        "url": "https://turgutsalgin.site",
+        "logo": {
+          "@type": "Text",
+          "name": "Turgut Salgın",
+          "url": "https://turgutsalgin.site",
+          "text": "Turgut Salgın"
+        }
+      }
+    }
+  </script>
+
 <%- include('../partials/footer') %>
